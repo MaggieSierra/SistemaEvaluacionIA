@@ -1,0 +1,49 @@
+body{
+    background-color: #EBEBEB;
+}
+
+.nav-link{
+	font-weight:bold!important;
+}
+
+.nav-tabs{
+	margin-top: 20px!important;
+}
+
+.table{
+    background-color: #ffffff;
+}
+
+.table td, .table th{
+    text-align: center;
+}
+
+.btn-primary{
+    min-width: 89px;
+    border-radius: 40px;
+    background: #368CA7;
+}
+
+.btn-secondary{
+    background: #ffffff;
+    border-radius: 40px;
+    color: #000000;
+}
+
+.btn-secondary:focus, .btn-secondary:hover{
+    background:#368CA7;
+}
+
+.container-opc{
+	text-align: center;
+    background: #565656;
+    border-radius: 1.3rem;
+    padding: 15px 35px;
+}
+
+.contenedor{
+    align-items: center;
+    display: flex!important;
+    flex-direction: column;
+    margin-top: 50px;
+}
