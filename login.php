@@ -4,7 +4,7 @@
 	<meta charset="ISO-8859-1">
 	<title>Login</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/login.css">
 </head>
 <body>
 <div class="contenedor">
