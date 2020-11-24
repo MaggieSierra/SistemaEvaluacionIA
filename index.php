@@ -1,6 +1,6 @@
 <?php 
 
-$rol = 1;// 1:Rol estudiante, 2:Rol maestro
+$rol = 2;// 1:Rol estudiante, 2:Rol maestro
 ?>
 <!DOCTYPE html>
 <html>
