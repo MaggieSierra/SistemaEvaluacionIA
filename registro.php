@@ -68,7 +68,7 @@
                     if(data != ""){
                         $("#response").html("<span style='color:red; font-weight:bold;'>"+data+"<span>");
                     }else{
-                        $("#response").html("<span style='color:green; font-weight:bold;'>Registro exitoso<span>");
+                        $("#response").html("<span style='color:#70da70; font-weight:bold;'>Registro exitoso<span>");
                     }
                 }
             });
