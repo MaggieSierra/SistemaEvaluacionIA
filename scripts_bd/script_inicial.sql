@@ -1,5 +1,5 @@
-CREATE DATABASE EvaluacionIA;
-USE EvaluacionIA;
+CREATE DATABASE Evaluacion_IA;
+USE Evaluacion_IA;
 
 CREATE TABLE Rol (
 	id_rol INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -20,7 +20,14 @@ CREATE TABLE Usuario (
 CREATE TABLE Materia(
     id_materia INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
-    nombre_materia VARCHAR(100) NOT NULL
+    nombre_materia VARCHAR(100) NOT NULL,
+	clave_materia VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE Materia_Alumno(
+    id_materia_alumno INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	id_materia INT NOT NULL,
+    id_usuario INT NOT NULL
 );
 
 CREATE TABLE Evaluacion (
@@ -54,6 +61,8 @@ CREATE TABLE Respuesta(
 /*Llaves foraneas*/
 ALTER TABLE Usuario ADD CONSTRAINT fk_usuario_rol FOREIGN KEY (id_rol) REFERENCES Rol(id_rol);
 ALTER TABLE Materia ADD CONSTRAINT fk_materia_usuario FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario);
+ALTER TABLE Materia_Alumno ADD CONSTRAINT fk_materia_alumno_materia FOREIGN KEY (id_materia) REFERENCES Materia(id_materia);
+ALTER TABLE Materia_Alumno ADD CONSTRAINT fk_materia_alumno_alumno FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario);
 ALTER TABLE Evaluacion ADD CONSTRAINT fk_evaluacion_materia FOREIGN KEY (id_materia) REFERENCES Materia(id_materia);
 ALTER TABLE Calificacion ADD CONSTRAINT fk_usuario_calificacion FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario);
 ALTER TABLE Calificacion ADD CONSTRAINT fk_evaluacion_calificacion FOREIGN KEY (id_evaluacion) REFERENCES Evaluacion(id_evaluacion);
@@ -61,3 +70,6 @@ ALTER TABLE Pregunta ADD CONSTRAINT fk_pregunta_evaluacion FOREIGN KEY (id_evalu
 ALTER TABLE Respuesta ADD CONSTRAINT fk_respuesta_evaluacion FOREIGN KEY (id_evaluacion) REFERENCES Evaluacion(id_evaluacion);
 ALTER TABLE Respuesta ADD CONSTRAINT fk_respuesta_pregunta FOREIGN KEY (id_pregunta) REFERENCES Pregunta(id_pregunta);
 ALTER TABLE Respuesta ADD CONSTRAINT fk_respuesta_usuario FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario);
+
+/*inserts iniciales */
+INSERT INTO `rol` (`id_rol`, `nombre_rol`) VALUES (NULL, 'Profesor'), (NULL, 'Estudiante');
