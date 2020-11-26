@@ -36,6 +36,8 @@ if(isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['usuari
     }else{
         echo "El usuario ya existe";
     }
+}else{
+    echo "Campos vacios";
 }
 
 ?>
