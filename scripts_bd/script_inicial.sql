@@ -10,8 +10,7 @@ CREATE TABLE Usuario (
 	id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_rol INT NOT NULL,
     nombre VARCHAR(50) NOT NULL,
-	primer_apellido VARCHAR(50) NOT NULL,
-	segundo_apellido VARCHAR(50),
+	apellidos VARCHAR(100) NOT NULL,
 	usuario VARCHAR(50) NOT NULL,
 	password VARCHAR(50) NOT NULL,
 	fecha_registro DATE NOT NULL
