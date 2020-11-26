@@ -12,7 +12,7 @@ CREATE TABLE Usuario (
     nombre VARCHAR(50) NOT NULL,
 	apellidos VARCHAR(100) NOT NULL,
 	usuario VARCHAR(50) NOT NULL,
-	password VARCHAR(50) NOT NULL,
+	password VARCHAR(100) NOT NULL,
 	fecha_registro DATE NOT NULL
 );
 
