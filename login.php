@@ -12,7 +12,7 @@
 		<img id="img_login" src="assets/img/user.svg" width="100px">
 		<h4 style="color:#ffffff;">Sing In</h4>
 		<div class="col-md-12">
-			<form action="loginprocess.jsp" method="post">
+			<form action="" id="formlogin" method="post">
 				<div style="max-width: 300px;position: relative; margin-bottom: 25px;">
 					<input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" required autocomplete="off" style="padding-left:30px;">
 					<img src="assets/img/usuario.svg" style="position: absolute;top: 8px;left: 3px;width: 27px;">
@@ -27,5 +27,31 @@
 		
 	</div>
 </div>
+<script src="assets/js/jquery.min.js"></script>
+
+<script type="text/javascript">
+jQuery(document).on('submit', '#formlogin', function(event){
+	event.preventDefault();
+
+	jQuery.ajax({
+		url: 'php/validar_usuario.php',
+		type: 'POST',
+		dataType: 'json',
+		data: $(this).serialize(),
+		beforeSend: function(){
+
+		}
+	})
+	.done(function(respuesta){
+		console.log(respuesta);
+	})
+	.fail(function(resp){
+		console.log(resp.responseText);
+	})
+	.always(function(){
+		console.log("complete");
+	});
+});
+</script>
 </body>
 </html>
