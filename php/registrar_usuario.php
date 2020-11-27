@@ -23,7 +23,7 @@ if(isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['usuari
     if(empty($result)){
         $fecha = date('Y-m-d H:i:s');
         $password= password_hash($password, PASSWORD_BCRYPT);
-        $query = $conexion->prepare("INSERT INTO usuario(id_rol, nombre, apellidos, usuario, password, fecha_registro)
+        $query = $conexion->prepare("INSERT INTO Usuario(id_rol, nombre, apellidos, usuario, password, fecha_registro)
          VALUES (?, ?, ?, ?, ?, ?)");
         $query->bindParam(1, $id_rol);
         $query->bindParam(2, $nombre);

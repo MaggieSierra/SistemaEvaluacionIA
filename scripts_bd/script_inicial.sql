@@ -71,4 +71,4 @@ ALTER TABLE Respuesta ADD CONSTRAINT fk_respuesta_pregunta FOREIGN KEY (id_pregu
 ALTER TABLE Respuesta ADD CONSTRAINT fk_respuesta_usuario FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario);
 
 /*inserts iniciales */
-INSERT INTO `rol` (`id_rol`, `nombre_rol`) VALUES (NULL, 'Profesor'), (NULL, 'Estudiante');
+INSERT INTO `Rol` (`id_rol`, `nombre_rol`) VALUES (NULL, 'Profesor'), (NULL, 'Estudiante');
