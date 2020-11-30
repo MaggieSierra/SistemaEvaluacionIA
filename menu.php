@@ -6,5 +6,5 @@
     <?php } else { ?>
         <li class="nav-item"><a class="nav-link" href="materias.php">Materias</a></li>
     <?php } ?>
-    <li class="nav-item"><a class="nav-link" href="#">Cerrar Sesion</a></li>
+    <li class="nav-item"><a class="nav-link" href="logout.php">Cerrar Sesion</a></li>
 </ul>

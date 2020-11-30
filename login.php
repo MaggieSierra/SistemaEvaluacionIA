@@ -39,11 +39,19 @@ jQuery(document).on('submit', '#formlogin', function(event){
 		dataType: 'json',
 		data: $(this).serialize(),
 		beforeSend: function(){
-
 		}
 	})
 	.done(function(respuesta){
 		console.log(respuesta);
+		if(!respuesta.error){
+			if(respuesta.rol == '1'){
+				location.href = 'index.php';
+			}else if(respuesta.rol == '2'){
+				location.href = '';
+			}
+		}else{
+
+		}
 	})
 	.fail(function(resp){
 		console.log(resp.responseText);

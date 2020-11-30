@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 $rol = 2;// 1:Rol estudiante, 2:Rol maestro
 ?>
@@ -15,7 +16,11 @@ $rol = 2;// 1:Rol estudiante, 2:Rol maestro
         <?php include('menu.php');?>
 		<br>
 		<div class="col-12" style="text-align: center;">
-			<h2>Bienvenido ${nombre}</h2>
+			
+			<h2><?php
+			// Echo session variables that were set on previous page
+			echo "Bienvenido " . $_SESSION['usuario'] . ".";
+			?></h2> 
 		</div>
 	</div>
 </html>

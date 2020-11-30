@@ -1,5 +1,6 @@
 <?php 
 require_once "db.php";
+session_start();
 
 if( isset($_POST['usuario']) && isset($_POST['password'])){
     $usuario = trim($_POST['usuario']);
@@ -14,6 +15,7 @@ if( isset($_POST['usuario']) && isset($_POST['password'])){
     if($query->rowCount() == 1):
         $datos = $query->fetch(PDO::FETCH_ASSOC);
         echo json_encode(array('error' => false, 'rol' => $datos['id_rol']));
+        $_SESSION['usuario'] = $usuario;
     else:
         echo json_encode(array('error' => true));
     endif;  
