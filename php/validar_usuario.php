@@ -10,14 +10,19 @@ if( isset($_POST['usuario']) && isset($_POST['password'])){
     $conexion = obtenerConexion();
 
     //FALTA COMPARAR HASH CON LA CONTRASEÑA INTRODUCCIDA
-    $query = $conexion->query("SELECT id_usuario, nombre, id_rol FROM Usuario WHERE usuario = '$usuario' AND password = '$password'");
+    $query = $conexion->query("SELECT id_usuario, nombre, id_rol, password FROM Usuario WHERE usuario = '$usuario' LIMIT 1");
 
     if($query->rowCount() == 1):
         $datos = $query->fetch(PDO::FETCH_ASSOC);
-        echo json_encode(array('error' => false, 'rol' => $datos['id_rol']));
-        $_SESSION['usuario'] = $usuario;
+        if (password_verify(trim($password), $datos['password'])):
+            echo json_encode(array('error' => false, 'rol' => $datos['id_rol']));
+            $_SESSION['usuario'] = $usuario;
+            $_SESSION['nombre'] = $datos['nombre'];
+            $_SESSION['rol'] = $datos['id_rol'];
+        else: echo json_encode(array('error' => true, 'password' => 'incorrecta'));
+        endif;
     else:
-        echo json_encode(array('error' => true));
+        echo json_encode(array('error1' => true));
     endif;  
 
 }else{

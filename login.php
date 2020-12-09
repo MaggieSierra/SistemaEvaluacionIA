@@ -48,7 +48,7 @@ jQuery(document).on('submit', '#formlogin', function(event){
 			if(respuesta.rol == '1'){
 				location.href = 'index.php';
 			}else if(respuesta.rol == '2'){
-				location.href = '';
+				location.href = 'index.php';
 			}
 		}else{
 

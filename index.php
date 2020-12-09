@@ -1,7 +1,6 @@
 <?php 
-session_start();
-
-$rol = 2;// 1:Rol estudiante, 2:Rol maestro
+	require("php/security.php");
+	Seguridad();
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +18,7 @@ $rol = 2;// 1:Rol estudiante, 2:Rol maestro
 			
 			<h2><?php
 			// Echo session variables that were set on previous page
-			echo "Bienvenido " . $_SESSION['usuario'] . ".";
+			echo "Bienvenido " . $_SESSION['nombre'] . ".";
 			?></h2> 
 		</div>
 	</div>
