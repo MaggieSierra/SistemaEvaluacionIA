@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="contenedor">
+    <h2>Evaluación Online</h2><br>
 	<div class="container-logo">
 		<img id="img_login" src="assets/img/user.svg" width="100px">
         <h4 style="color:#ffffff;">Sing Up</h4>
@@ -46,6 +47,7 @@
                 </div>
             <input type="submit" name="btn-login" id="btn-login" value="Registrar" class="btn btn-primary">
             </form>
+            <h6>¿Ya tienes una cuenta? <a href="login.php">Ingresa</a></h6>
         </div>
 	</div>
 </div>

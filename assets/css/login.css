@@ -31,6 +31,18 @@ body{
     text-align: right;
 }
 
+.container-logo h6, .container-logo h4{
+    color: #ffffff;
+}
+
+.container-logo h6>a{
+    color: #8cf2ff;
+}
+
+.contenedor h2{
+    color: #368ca7;;
+}
+
 
 
 

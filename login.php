@@ -8,9 +8,10 @@
 </head>
 <body>
 <div class="contenedor">
+	<h2>Evaluación Online</h2><br>
 	<div class="container-logo">
 		<img id="img_login" src="assets/img/user.svg" width="100px">
-		<h4 style="color:#ffffff;">Sing In</h4>
+		<h4>Sing In</h4>
 		<div class="col-md-12">
 			<form action="" id="formlogin" method="post">
 				<div style="max-width: 300px;position: relative; margin-bottom: 25px;">
@@ -23,8 +24,8 @@
 				</div>
 			<input type="submit" name="btn-login" id="btn-login" value="Login" class="btn btn-primary">
 			</form>
+			<h6>¿No tienes una cuenta? <a href="registro.php">Regístrate</a></h6>
 		</div>
-		
 	</div>
 </div>
 <script src="assets/js/jquery.min.js"></script>
