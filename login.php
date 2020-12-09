@@ -15,7 +15,7 @@
 		<div class="col-md-12">
 			<form action="" id="formlogin" method="post">
 				<div style="max-width: 300px;position: relative; margin-bottom: 25px;">
-					<input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" required autocomplete="off" style="padding-left:30px;">
+					<input type="email" name="usuario" id="usuario" class="form-control" placeholder="Correo" required autocomplete="off" style="padding-left:30px;">
 					<img src="assets/img/usuario.svg" style="position: absolute;top: 8px;left: 3px;width: 27px;">
 				</div>
 				<div style="max-width: 300px;position: relative;margin-bottom: 25px;">

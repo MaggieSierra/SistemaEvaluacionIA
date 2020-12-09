@@ -15,7 +15,7 @@ if(isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['usuari
     //Establecer conexión a BD
     $conexion = obtenerConexion();
 
-    $query = $conexion->prepare("SELECT id_usuario FROM usuario WHERE usuario = ? ORDER BY id_usuario DESC LIMIT 1");
+    $query = $conexion->prepare("SELECT id_usuario FROM Usuario WHERE Usuario = ? LIMIT 1");
     $query->bindParam(1, $usuario);
     $query->execute();
     $result = $query->fetchAll();
@@ -34,7 +34,7 @@ if(isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['usuari
         $query->execute();
         $result = $query->fetchAll();
     }else{
-        echo "El usuario ya existe";
+        echo "El correo ya existe";
     }
 }else{
     echo "Campos vacios";
