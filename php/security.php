@@ -15,7 +15,7 @@
         if (isset($_SESSION['usuario'])){
             return;
         }else{
-            echo "<script language='javascript'> document.location.href='login.php' </script>";
+            echo "<script language='javascript'> document.location.href='./login.php' </script>";
             exit();
         }
         

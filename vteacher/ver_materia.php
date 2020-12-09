@@ -1,5 +1,5 @@
 <?php 
-require("php/security.php");
+require("../php/security.php");
 Seguridad();
 if($_SESSION['rol'] == 1){
     header('Location: index.php');
@@ -11,11 +11,11 @@ if($_SESSION['rol'] == 1){
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Ver Materia</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
 	<div class="container">
-        <?php include('menu.php');?>
+        <?php include('../menu.php');?>
 		<br>
 		<div class="col-12" style="text-align: center;">
 			<h2>Base De Datos Avanzadas</h2>
