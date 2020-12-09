@@ -1,7 +1,7 @@
 <?php 
-
-$rol = 2;// 1:Rol estudiante, 2:Rol maestro
-if($rol == 1){
+require("php/security.php");
+Seguridad();
+if($_SESSION['rol'] == 1){
     header('Location: index.php');
 }
 ?>
