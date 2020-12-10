@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require("../php/security.php");
 Seguridad();
 if($_SESSION['rol'] == 2){
@@ -31,12 +32,19 @@ if($_SESSION['rol'] == 2){
                     <thead>
                         <tr><th>Materias</th><th></th></tr>
                     </thead>
+                    <?php 
+                    require_once '../php/db.php';
+                    $conexion = obtenerConexion();
+                    $query = $conexion->query("SELECT * FROM Materia");
+                    while($datos = $query->fetch(PDO::FETCH_ASSOC)){
+                    ?>
                     <tbody>
                         <tr>
-                            <td>Base de datos Avanzadas</td>
+                            <td><?php echo $datos['nombre_materia']?></td>
                             <td> <a class="btn btn-primary" href="ver_materia.php">Ver</a></td>
                         </tr>
                     </tbody>
+                    <?php } ?>
                 </table>
             </div>
         </div>
