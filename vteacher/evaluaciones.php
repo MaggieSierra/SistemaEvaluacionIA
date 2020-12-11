@@ -57,7 +57,7 @@ if(empty($html)){
 		<br>
         <div class="row" style="margin-bottom: 20px;">
             <div class="col-md-5">
-                <button class="btn btn-success" id="agregar_materia">Nueva evaluación</button>
+                <button class="btn btn-success" id="agregar_materia"><a href="crear_evaluacion.php">Nueva evaluación</a></button>
             </div>
             <div class="col-md-7">
                 <form action="evaluaciones.php" method="POST">
@@ -79,5 +79,6 @@ if(empty($html)){
             </tbody>
         </table>
 		
-	</div>
+    </div>
+</body>
 </html>
