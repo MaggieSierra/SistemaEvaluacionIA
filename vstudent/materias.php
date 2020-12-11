@@ -8,7 +8,10 @@ if($_SESSION['rol'] == 1){
 $conexion = obtenerConexion();
 
 $query = $conexion->prepare("SELECT Materia.* FROM Materia INNER JOIN
-Materia_Alumno ON Materia_Alumno.id_materia = Materia.id_materia;");
+Materia_Alumno ON Materia_Alumno.id_materia = Materia.id_materia
+INNER JOIN Usuario on Usuario.id_usuario = Materia_Alumno.id_usuario
+WHERE Usuario.usuario=?");
+$query->bindParam(1, $_SESSION['usuario']);
 $query->execute();
 $materias = $query->fetchAll();
 
