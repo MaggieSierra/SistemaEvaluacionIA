@@ -14,7 +14,7 @@ $query->execute();
 $materias = $query->fetchAll();
 
 foreach ($materias as $row) { 
-    $html .= "<tr><td>".$row['id_materia']."</td><td>".$row['nombre_materia']."</td></tr>";
+    $html .= "<tr><td>".$row['clave_materia']."</td><td>".$row['nombre_materia']."</td></tr>";
 }
 
 if(isset($_POST['inputNombre'])){
@@ -51,7 +51,7 @@ if(isset($_POST['inputNombre'])){
             <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>
-                        <tr><th>Id</th><th>Materias</th></tr>
+                        <tr><th>Clave</th><th>Materias</th></tr>
                     </thead>
                     <tbody>
                     <?=$html;?>     
