@@ -16,7 +16,7 @@ $query->execute();
 $materias = $query->fetchAll();
 
 foreach ($materias as $row){
-	$html .= "<tr><td>".$row['nombre_materia']."</td><td><a class='btn btn-primary' href='ver_materia.php?id='".$row['id_materia'].">Ver</a></td></tr>";
+	$html .= "<tr><td>".$row['nombre_materia']."</td><td><a class='btn btn-primary' href='ver_materia.php?id=".$row['id_materia']."'>Ver</a>"; 
 }
 ?>
 <!DOCTYPE html>
