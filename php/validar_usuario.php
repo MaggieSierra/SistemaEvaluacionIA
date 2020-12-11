@@ -6,10 +6,8 @@ if( isset($_POST['usuario']) && isset($_POST['password'])){
     $usuario = trim($_POST['usuario']);
     $password = trim($_POST['password']);
 
-    //Establecer conexion con BD
     $conexion = obtenerConexion();
 
-    //FALTA COMPARAR HASH CON LA CONTRASEÑA INTRODUCCIDA
     $query = $conexion->query("SELECT id_usuario, nombre, id_rol, password FROM Usuario WHERE usuario = '$usuario' LIMIT 1");
 
     if($query->rowCount() == 1):
