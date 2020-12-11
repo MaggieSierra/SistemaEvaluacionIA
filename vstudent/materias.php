@@ -4,6 +4,17 @@ Seguridad();
 if($_SESSION['rol'] == 1){
     header('Location: index.php');
 }
+
+$conexion = obtenerConexion();
+
+$query = $conexion->prepare("SELECT Materia.* FROM Materia INNER JOIN
+Materia_Alumno ON Materia_Alumno.id_materia = Materia.id_materia;");
+$query->execute();
+$materias = $query->fetchAll();
+
+foreach ($materias as $row){
+	$html .= "<tr><td>".$row['nombre_materia']."</td><td><a class='btn btn-primary' href='ver_materia.php?id='".$row['id_materia'].">Ver</a></td></tr>";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,10 +38,7 @@ if($_SESSION['rol'] == 1){
                         <tr><th>Materias</th><th></th></tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Base de datos Avanzadas</td>
-                            <td> <a class="btn btn-primary" href="ver_materia.php">Ver</a></td>
-                        </tr>
+                        <?=$html;?>
                     </tbody>
                 </table>
             </div>
