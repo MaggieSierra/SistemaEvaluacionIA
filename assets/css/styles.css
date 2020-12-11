@@ -47,3 +47,33 @@ body{
     flex-direction: column;
     margin-top: 50px;
 }
+
+.btn>a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.card>.card-header{
+    background: #368CA7;
+    color: #ffffff;
+}
+
+#preguntas .card>.card-header{
+    padding: 0px 16px;
+    text-align: right;
+}
+
+#preguntas .card{
+    margin-bottom: 10px;
+}
+
+.btn-quitar-preg{
+    background: #368CA7;
+    color: #ffffff;
+    outline: 0;
+    padding: 3px 12px;
+}
+
+.btn-quitar-preg:hover{
+    outline: 0;
+}
