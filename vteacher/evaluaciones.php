@@ -35,7 +35,7 @@ if(isset($_POST["id_materia"])){
 
 
 foreach ($evaluaciones as $row) { 
-    $html .= "<tr><td>".$row['nombre_materia']."</td><td>".$row['tema']."</td><td><a class='btn btn-primary' href='editar_evaluacion.php?id='".$row['id_evaluacion'].">Editar</a></td></tr>";
+    $html .= "<tr><td>".$row['nombre_materia']."</td><td>".$row['tema']."</td><td><a class='btn btn-primary' href='ver_evaluacion.php?id=".$row['id_evaluacion']."'>Ver</a> <a class='btn btn-warning' href='editar_evaluacion.php?id=".$row['id_evaluacion']."'>Editar</a></td></tr>";
 }
 
 if(empty($html)){
