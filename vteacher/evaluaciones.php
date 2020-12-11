@@ -4,32 +4,78 @@ Seguridad();
 if($_SESSION['rol'] == 2){
     header('Location: index.php');
 }
+
+$conexion = obtenerConexion();
+
+$query = $conexion->prepare("SELECT * FROM Materia INNER JOIN Usuario ON Usuario.id_usuario = Materia.id_usuario WHERE Usuario.usuario = ?");
+$query->bindParam(1, $_SESSION['usuario']);
+$query->execute();
+$materias = $query->fetchAll();
+
+foreach ($materias as $row) { 
+    $list_materias .= "<option value='".$row['id_materia']."'>".$row['nombre_materia']."</option>";
+}
+
+if(isset($_POST["id_materia"])){
+    $query = $conexion->prepare("SELECT Evaluacion.*, nombre_materia FROM Evaluacion INNER JOIN Materia 
+    ON Materia.id_materia = Evaluacion.id_materia INNER JOIN Usuario 
+    ON Usuario.id_usuario = Materia.id_usuario WHERE Usuario.usuario = ? AND Materia.id_materia = ?");
+    $query->bindParam(1, $_SESSION['usuario']);
+    $query->bindParam(2, $_POST["id_materia"]);
+    $query->execute();
+    $evaluaciones = $query->fetchAll();
+}else{
+    $query = $conexion->prepare("SELECT Evaluacion.*, nombre_materia FROM Evaluacion INNER JOIN Materia 
+    ON Materia.id_materia = Evaluacion.id_materia INNER JOIN Usuario 
+    ON Usuario.id_usuario = Materia.id_usuario WHERE Usuario.usuario = ?");
+    $query->bindParam(1, $_SESSION['usuario']);
+    $query->execute();
+    $evaluaciones = $query->fetchAll();
+}
+
+
+foreach ($evaluaciones as $row) { 
+    $html .= "<tr><td>".$row['nombre_materia']."</td><td>".$row['tema']."</td><td><a class='btn btn-primary' href='editar_evaluacion.php?id='".$row['id_evaluacion'].">Editar</a></td></tr>";
+}
+
+if(empty($html)){
+    $html .= "<tr><td colspan='3'>No se encontraron evaluaciones</td></tr>";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Materias</title>
+	<title>Evaluaciones</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
 	<div class="container">
-        <?php include('../menu.php');?>
+        <?php include('../menu2.php');?>
 		<br>
-		<div class="col-12" style="text-align: center;">
-			<h2></h2>
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-5">
+                <button class="btn btn-success" id="agregar_materia">Nueva evaluación</button>
+            </div>
+            <div class="col-md-7">
+                <form action="evaluaciones.php" method="POST">
+                    <span class="col-md-4"><strong>Elegir Materia:</strong></span>
+                    <select name="id_materia" id="materia" class="form-control col-md-6" style="display: inline-block;">
+                        <option value="0" selected disabled>Selección</option>
+                        <?=$list_materias;?>
+                    </select>
+                    <input type='submit' name='buscar' class='btn btn-primary col-md-2' value='Buscar'> 
+                </form>
+            </div>
         </div>
-        
         <table class="table table-bordered">
             <thead>
-                <tr><th>Evaluaciones</th><th></th></tr>
+                <tr><th>Materia</th><th>Evaluación</th><th></th></tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Mineria de datos</td>
-                    <td> <a class="btn btn-primary" href="#">Calificaciones</a></td>
-                </tr>
+                <?=$html;?>
             </tbody>
         </table>
 		
