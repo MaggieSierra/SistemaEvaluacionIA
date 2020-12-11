@@ -72,3 +72,12 @@ ALTER TABLE Respuesta ADD CONSTRAINT fk_respuesta_usuario FOREIGN KEY (id_usuari
 
 /*inserts iniciales */
 INSERT INTO `Rol` (`id_rol`, `nombre_rol`) VALUES (NULL, 'Profesor'), (NULL, 'Estudiante');
+
+/*Trigger para generar automáticamente "clave_materia" de la tabla Materia*/
+CREATE TRIGGER generar_clave BEFORE INSERT ON Materia FOR EACH ROW
+BEGIN
+  DECLARE next_id INT;
+
+  SET next_id = (SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='Materia');
+  SET NEW.clave_materia = CONCAT('MT', LPAD(next_id, 3, '0'), 'XS');
+END;
