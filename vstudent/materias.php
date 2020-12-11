@@ -26,7 +26,7 @@ foreach ($materias as $row){
 </head>
 <body>
 	<div class="container">
-        <?php include('../menu.php');?>
+        <?php include('../menu2.php');?>
 		<br>
 		<div class="col-12" style="text-align: center;">
 			<h2></h2>
