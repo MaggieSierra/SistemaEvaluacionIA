@@ -16,6 +16,7 @@ if( isset($_POST['usuario']) && isset($_POST['password'])){
             echo json_encode(array('error' => false, 'rol' => $datos['id_rol']));
             $_SESSION['usuario'] = $usuario;
             $_SESSION['nombre'] = $datos['nombre'];
+            $_SESSION['id_usuario'] = $datos['id_usuario'];
             $_SESSION['rol'] = $datos['id_rol'];
         else: echo json_encode(array('error' => true, 'password' => 'incorrecta'));
         endif;

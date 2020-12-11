@@ -5,6 +5,27 @@ Seguridad();
 if($_SESSION['rol'] == 2){
     header('Location: index.php');
 }
+
+$conexion = obtenerConexion();
+
+$query = $conexion->prepare("SELECT * FROM Materia INNER JOIN Usuario ON Usuario.id_usuario = Materia.id_usuario WHERE Usuario.usuario = ?");
+$query->bindParam(1, $_SESSION['usuario']);
+$query->execute();
+$materias = $query->fetchAll();
+
+foreach ($materias as $row) { 
+    $html .= "<tr><td>".$row['id_materia']."</td><td>".$row['nombre_materia']."</td></tr>";
+}
+
+if(isset($_POST['inputNombre'])){
+    $nombre = trim($_POST['inputNombre']);
+
+    $query = $conexion->prepare("INSERT INTO Materia (id_usuario, nombre_materia) VALUES (?, ?)");
+    $query->bindParam(1, $_SESSION['id_usuario']);
+    $query->bindParam(2, $nombre);
+    $query->execute();
+    $result = $query->fetchAll();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,21 +51,11 @@ if($_SESSION['rol'] == 2){
             <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>
-                        <tr><th>Materias</th><th></th></tr>
+                        <tr><th>Id</th><th>Materias</th></tr>
                     </thead>
-                    <?php 
-                    require_once '../php/db.php';
-                    $conexion = obtenerConexion();
-                    $query = $conexion->query("SELECT * FROM Materia");
-                    while($datos = $query->fetch(PDO::FETCH_ASSOC)){
-                    ?>
                     <tbody>
-                        <tr>
-                            <td><?php echo $datos['nombre_materia']?></td>
-                            <td> <a class="btn btn-primary" href="ver_materia.php">Ver</a></td>
-                        </tr>
+                    <?=$html;?>     
                     </tbody>
-                    <?php } ?>
                 </table>
             </div>
         </div>
@@ -60,7 +71,7 @@ if($_SESSION['rol'] == 2){
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form" method="post" id="materia" action="#">
+                    <form class="form-horizontal" role="form" method="post" id="materia" action="materias.php">
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="inputNombre">Nombre</label>
                             <div class="col-sm-8">
