@@ -24,7 +24,8 @@ cerrarConexion($conexion, $query);
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Evaluaciones</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
@@ -53,7 +54,7 @@ cerrarConexion($conexion, $query);
                         <input type="text" name="tema" id="tema" class="form-control" required>
                     </div>
                 </div>
-                <button class="btn btn-success" onclick="add_pregunta();">+</button>
+                <button class="btn btn-success" onclick="add_pregunta();"><i class="fas fa-plus-circle"></i></button>
                 <button class="btn btn-success" onclick="guardar_evaluacion();">Guardar</button>
             </div>
         </div><br>

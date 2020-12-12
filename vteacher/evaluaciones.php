@@ -35,7 +35,7 @@ if(isset($_POST["id_materia"])){
 
 
 foreach ($evaluaciones as $row) { 
-    $html .= "<tr><td>".$row['nombre_materia']."</td><td>".$row['tema']."</td><td><a class='btn btn-primary' href='ver_evaluacion.php?id=".$row['id_evaluacion']."'>Ver</a> <a class='btn btn-warning' href='editar_evaluacion.php?id=".$row['id_evaluacion']."'>Editar</a></td></tr>";
+    $html .= "<tr><td>".$row['nombre_materia']."</td><td>".$row['tema']."</td><td><a class='btn btn-primary' href='ver_evaluacion.php?id=".$row['id_evaluacion']."'><i class='fas fa-eye'></i></a> <a class='btn btn-warning' href='editar_evaluacion.php?id=".$row['id_evaluacion']."'><i class='fas fa-edit'></i></a></td></tr>";
 }
 
 if(empty($html)){
@@ -49,7 +49,8 @@ cerrarConexion($conexion, $query);
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Evaluaciones</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
@@ -67,7 +68,7 @@ cerrarConexion($conexion, $query);
                         <option value="0" selected disabled>Selección</option>
                         <?=$list_materias;?>
                     </select>
-                    <input type='submit' name='buscar' class='btn btn-primary col-md-2' value='Buscar'> 
+                    <button type='submit' name='buscar' class='btn btn-primary col-md-2'><i class="fas fa-search"></i></button>
                 </form>
             </div>
         </div>
