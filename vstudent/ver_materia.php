@@ -7,13 +7,6 @@ if($_SESSION['rol'] == 1){
 
 $conexion = obtenerConexion();
 
-$a = $_GET["id"];
-
-$query = $conexion->prepare("SELECT nombre_materia FROM Materia WHERE id_materia= ?");
-$query->bindParam(1,  $_GET["id"]);
-$query->execute();
-$materia = $query->fetchAll();
-
 $query = $conexion->prepare("SELECT Evaluacion.*, nombre_materia FROM Evaluacion INNER JOIN Materia
 ON Materia.id_materia = Evaluacion.id_materia
 INNER JOIN Materia_Alumno on Materia_Alumno.id_materia = Materia.id_materia
