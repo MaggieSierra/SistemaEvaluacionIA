@@ -4,12 +4,40 @@ Seguridad();
 if($_SESSION['rol'] == 1){
     header('Location: index.php');
 }
+
+$conexion = obtenerConexion();
+
+$a = $_GET["id"];
+
+$query = $conexion->prepare("SELECT nombre_materia FROM Materia WHERE id_materia= ?");
+$query->bindParam(1,  $_GET["id"]);
+$query->execute();
+$materia = $query->fetchAll();
+
+$query = $conexion->prepare("SELECT Evaluacion.*, nombre_materia FROM Evaluacion INNER JOIN Materia
+ON Materia.id_materia = Evaluacion.id_materia
+INNER JOIN Materia_Alumno on Materia_Alumno.id_materia = Materia.id_materia
+INNER JOIN Usuario ON Usuario.id_usuario = Materia_Alumno.id_usuario 
+WHERE Usuario.usuario = ? AND Materia_Alumno.id_materia = ?");
+$query->bindParam(1, $_SESSION['usuario']);
+$query->bindParam(2, $_GET['id']);
+$query->execute();
+$evaluaciones = $query->fetchAll();
+
+foreach ($evaluaciones as $row) { 
+    $html .= "<tr><td>".$row['tema']."</td><td><a class='btn btn-primary' href='realizar_evaluacion.php?id=".$row['id_evaluacion']."'>Realizar</a> <a class='btn btn-light' href='calificacion.php'>Calificación</a></td></tr>";
+}
+
+if(empty($html)){
+    $html .= "<tr><td colspan='3'>No se encontraron evaluaciones</td></tr>";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Ver Materia</title>
+	<title>Ver_materia</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
@@ -17,18 +45,19 @@ if($_SESSION['rol'] == 1){
 	<div class="container">
         <?php include('../menu2.php');?>
 		<br>
-		<div class="col-12" style="text-align: center;">
-			<h2>Base De Datos Avanzadas</h2>
+        <div class="col-12" style="text-align: center;">
+			<h2><?=$evaluaciones[0]['nombre_materia']?></h2>
 		</div>
-		<div class="contenedor">
-			<div class="container-opc">
-				<div style="max-width: 300px;position: relative; margin: 25px; margin-bottom: 40px;">
-					<a class="btn btn-secondary" href="realizar_evaluacion.php">Realizar evaluación</a>
-				</div>
-				<div style="max-width: 300px;position: relative;margin: 25px;">
-					<a class="btn btn-secondary" href="crear_evaluacion.php">Ver calificación</a>
-				</div>
-			</div>
-		</div>
-	</div>
+		</br>
+        <table class="table table-bordered">
+            <thead>
+                <tr><th>Evaluación</th><th></th></tr>
+            </thead>
+            <tbody>
+                <?=$html;?>
+            </tbody>
+        </table>
+		
+    </div>
+</body>
 </html>
