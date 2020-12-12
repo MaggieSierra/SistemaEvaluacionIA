@@ -16,6 +16,8 @@ foreach ($materias as $row) {
     $list_materias .= "<option value='".$row['id_materia']."'>".$row['nombre_materia']."</option>";
 }
 
+cerrarConexion($conexion, $query);
+
 ?>
 <!DOCTYPE html>
 <html>

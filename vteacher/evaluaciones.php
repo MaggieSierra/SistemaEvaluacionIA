@@ -42,6 +42,7 @@ if(empty($html)){
     $html .= "<tr><td colspan='3'>No se encontraron evaluaciones</td></tr>";
 }
 
+cerrarConexion($conexion, $query);
 ?>
 <!DOCTYPE html>
 <html>
