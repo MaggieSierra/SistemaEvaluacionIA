@@ -1,11 +1,37 @@
 <?php 
+session_start();
 require("../php/security.php");
 Seguridad();
 if($_SESSION['rol'] == 2){
     header('Location: index.php');
 }
 
+//Comentario para sincronizacion de rama
+
 $conexion = obtenerConexion();
+
+if(isset($_POST['inputNombre'])){
+    $nombre = trim($_POST['inputNombre']);
+
+    $query = $conexion->prepare("INSERT INTO Materia (id_usuario, nombre_materia) VALUES (?, ?)");
+    $query->bindParam(1, $_SESSION['id_usuario']);
+    $query->bindParam(2, $nombre);
+    $query->execute();
+    $result = $query->fetchAll();
+    $_POST['inputNombre']="";
+}
+
+if(isset($_POST['idMateria'])){
+    
+    $nombre = trim($_POST['nombreMateria']);
+    $sql = "UPDATE Materia SET nombre_materia='$_POST[nombreMateria]' WHERE id_materia = $_POST[idMateria] ";
+    $query = $conexion->prepare($sql);
+    $query->execute();
+    $result = $query->fetchAll();
+    $_POST['nombreMateria']="";
+    $_POST['idMateria']="";
+}
+
 
 $query = $conexion->prepare("SELECT * FROM Materia INNER JOIN Usuario ON Usuario.id_usuario = Materia.id_usuario WHERE Usuario.usuario = ?");
 $query->bindParam(1, $_SESSION['usuario']);
@@ -13,10 +39,10 @@ $query->execute();
 $materias = $query->fetchAll();
 
 foreach ($materias as $row) { 
-    $html .= "<tr><td>".$row['clave_materia']."</td><td>".$row['nombre_materia']."</td></tr>";
+    $html .= "<tr><td>$row[clave_materia]</td><td>$row[nombre_materia]</td><td><input type='button' value='editar' onclick='editarMateria(\"$row[id_materia]-$row[nombre_materia]\");'/></td></tr>";
 }
 
-cerrarConexion($conexion, $query);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,6 +64,7 @@ cerrarConexion($conexion, $query);
                 <button class="btn btn-success" id="agregar_materia">Nueva materia</button>
             </div>
         </div>
+        <div class="row" id="formMaterias"></div>
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered">
@@ -62,7 +89,7 @@ cerrarConexion($conexion, $query);
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form" method="post" id="materia" action="../php/crear_materia.php">
+                    <form class="form-horizontal" role="form" method="post" id="materia" action="materias.php">
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="inputNombre">Nombre</label>
                             <div class="col-sm-8">
@@ -86,6 +113,13 @@ cerrarConexion($conexion, $query);
                 $('#modal_crear_materia').modal('show');
             });
         });
+        function editarMateria(valor)
+        {
+            valor = valor.split("-");
+            var regreso = "<form class='form-horizontal' role='form' method='post' id='materia' action='materias.php'>&nbsp; Nombre: &nbsp; <input type='text' value='"+valor[1]+"' id='nombreMateria' name='nombreMateria' style='width: 300px;'/> &nbsp;&nbsp; <button type='submit' >Guardar</button> <input type='text' value='"+valor[0]+"' id='idMateria' name='idMateria' style='display:none;'/></form>";
+            document.getElementById("formMaterias").innerHTML = regreso;
+            document.getElementById("nombreMateria").focus();
+        }
     </script>
 </body>
 </html>
