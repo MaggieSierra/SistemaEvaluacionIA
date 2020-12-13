@@ -11,7 +11,7 @@ $query = $conexion->prepare("SELECT Evaluacion.*, nombre_materia FROM Evaluacion
 ON Materia.id_materia = Evaluacion.id_materia
 INNER JOIN Materia_Alumno on Materia_Alumno.id_materia = Materia.id_materia
 INNER JOIN Usuario ON Usuario.id_usuario = Materia_Alumno.id_usuario 
-WHERE Usuario.usuario = ? AND Materia_Alumno.id_materia = ?");
+WHERE Usuario.usuario = ? AND Materia_Alumno.id_materia = ? AND Evaluacion.borrado = 0");
 $query->bindParam(1, $_SESSION['usuario']);
 $query->bindParam(2, $_GET['id']);
 $query->execute();
