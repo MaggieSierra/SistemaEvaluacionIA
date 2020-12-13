@@ -16,8 +16,9 @@ if(isset($_POST['clave_materia'])){
     $result = $query->fetchAll();
 
     if(!empty($result)){
-        $query = $conexion->prepare("SELECT * FROM Materia_Alumno WHERE id_materia  = ? ");
+        $query = $conexion->prepare("SELECT * FROM Materia_Alumno WHERE id_materia  = ? AND id_usuario = ?");
         $query->bindParam(1, $result[0]['id_materia']);
+        $query->bindParam(2, $_SESSION['id_usuario']);
         $query->execute();
         $result2 = $query->fetchAll();
 
