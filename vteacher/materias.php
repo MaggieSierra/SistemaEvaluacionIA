@@ -39,7 +39,7 @@ $query->execute();
 $materias = $query->fetchAll();
 
 foreach ($materias as $row) { 
-    $html .= "<tr><td>$row[clave_materia]</td><td>$row[nombre_materia]</td><td><input type='button' value='editar' onclick='editarMateria(\"$row[id_materia]-$row[nombre_materia]\");'/></td></tr>";
+    $html .= "<tr><td>$row[clave_materia]</td><td>$row[nombre_materia]</td><td><a type='button' class='btn btn-warning' onclick='editarMateria(\"$row[id_materia]-$row[nombre_materia]\");'/><i class='fas fa-edit'></i</a></td></tr>";
 }
 
 
@@ -50,6 +50,7 @@ foreach ($materias as $row) {
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Materias</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
