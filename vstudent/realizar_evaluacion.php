@@ -53,11 +53,14 @@ foreach ($preguntas as $row) {
         <div id="response"></div>
         <div class="col-12" style="text-align: center;">
 			<h2><?=$evaluacion[0]['tema']?></h2>
-		</div><br>
-        <div id="preguntas">
-            <?=$html_preguntas?>
-        </div>
-        
+        </div><br>
+        <form action="enviar_evaluacion.php" method="POST">
+            <div id="preguntas">
+                <?=$html_preguntas?>
+            </div>
+            <input type="hidden" id="id_evaluacion" name='id_evaluacion' value='"<?=$evaluacion[0]['id_evaluacion']?>"'>
+            <button type="submit" class="btn btn-success">Enviar Evaluación</button>
+        </form>
     </div>
 
     <script src="../assets/js/jquery.min.js"></script>
