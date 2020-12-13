@@ -32,7 +32,8 @@ CREATE TABLE Materia_Alumno(
 CREATE TABLE Evaluacion (
 	id_evaluacion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_materia INT NOT NULL,
-	tema VARCHAR(100) NOT NULL 
+	tema VARCHAR(100) NOT NULL,
+	borrado INT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE Calificacion(

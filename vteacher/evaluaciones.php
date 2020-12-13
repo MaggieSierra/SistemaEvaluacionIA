@@ -19,7 +19,7 @@ foreach ($materias as $row) {
 if(isset($_POST["id_materia"])){
     $query = $conexion->prepare("SELECT Evaluacion.*, nombre_materia FROM Evaluacion INNER JOIN Materia 
     ON Materia.id_materia = Evaluacion.id_materia INNER JOIN Usuario 
-    ON Usuario.id_usuario = Materia.id_usuario WHERE Usuario.usuario = ? AND Materia.id_materia = ?");
+    ON Usuario.id_usuario = Materia.id_usuario WHERE Usuario.usuario = ? AND Materia.id_materia = ? AND borrado = 0");
     $query->bindParam(1, $_SESSION['usuario']);
     $query->bindParam(2, $_POST["id_materia"]);
     $query->execute();
@@ -27,7 +27,7 @@ if(isset($_POST["id_materia"])){
 }else{
     $query = $conexion->prepare("SELECT Evaluacion.*, nombre_materia FROM Evaluacion INNER JOIN Materia 
     ON Materia.id_materia = Evaluacion.id_materia INNER JOIN Usuario 
-    ON Usuario.id_usuario = Materia.id_usuario WHERE Usuario.usuario = ?");
+    ON Usuario.id_usuario = Materia.id_usuario WHERE Usuario.usuario = ? AND borrado = 0");
     $query->bindParam(1, $_SESSION['usuario']);
     $query->execute();
     $evaluaciones = $query->fetchAll();
@@ -35,7 +35,11 @@ if(isset($_POST["id_materia"])){
 
 
 foreach ($evaluaciones as $row) { 
-    $html .= "<tr><td>".$row['nombre_materia']."</td><td>".$row['tema']."</td><td><a class='btn btn-primary' href='ver_evaluacion.php?id=".$row['id_evaluacion']."'><i class='fas fa-eye'></i></a> <a class='btn btn-warning' href='editar_evaluacion.php?id=".$row['id_evaluacion']."'><i class='fas fa-edit'></i></a></td></tr>";
+    $html .= "<tr><td>".$row['nombre_materia']."</td><td>".$row['tema']."</td>
+    <td><a class='btn btn-primary' href='ver_evaluacion.php?id=".$row['id_evaluacion']."'>
+    <i class='fas fa-eye'></i></a> <a class='btn btn-warning' href='editar_evaluacion.php?id=".$row['id_evaluacion']."'>
+    <i class='fas fa-edit'></i></a> <a class='btn btn-danger' href='#' onclick='eliminar_evaluacion(".$row['id_evaluacion'].")'>
+    <i class='fas fa-trash-alt'></i></a></td></tr>";
 }
 
 if(empty($html)){
@@ -82,5 +86,38 @@ cerrarConexion($conexion, $query);
         </table>
 		
     </div>
+
+    <div class="modal" id="modal_eliminar_evaluacion" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4>¿Desea eliminar la evaluaci&oacuten?</h4>
+                    <input type="hidden" id="id_evaluacion_eliminar" name="id_evaluacion_eliminar" value="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="eliminar_evaluacion">Eliminar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        function eliminar_evaluacion(id_evaluacion){
+            document.getElementById('id_evaluacion_eliminar').value = id_evaluacion;
+            $('#modal_eliminar_evaluacion').modal('show');
+        }
+
+        $('#eliminar_evaluacion').on('click', function() {
+            $('#modal_eliminar_evaluacion').modal('hide');
+            $.post('../php/eliminar_evaluacion.php', {id: $('#id_evaluacion_eliminar').val() },
+            function(data) {
+                //$("#div_response").html(data);
+            });
+        });
+    </script>
 </body>
 </html>
