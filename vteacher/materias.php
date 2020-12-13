@@ -1,5 +1,4 @@
 <?php 
-session_start();
 require("../php/security.php");
 Seguridad();
 if($_SESSION['rol'] == 2){
@@ -17,15 +16,7 @@ foreach ($materias as $row) {
     $html .= "<tr><td>".$row['clave_materia']."</td><td>".$row['nombre_materia']."</td></tr>";
 }
 
-if(isset($_POST['inputNombre'])){
-    $nombre = trim($_POST['inputNombre']);
-
-    $query = $conexion->prepare("INSERT INTO Materia (id_usuario, nombre_materia) VALUES (?, ?)");
-    $query->bindParam(1, $_SESSION['id_usuario']);
-    $query->bindParam(2, $nombre);
-    $query->execute();
-    $result = $query->fetchAll();
-}
+cerrarConexion($conexion, $query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -71,7 +62,7 @@ if(isset($_POST['inputNombre'])){
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form" method="post" id="materia" action="materias.php">
+                    <form class="form-horizontal" role="form" method="post" id="materia" action="../php/crear_materia.php">
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="inputNombre">Nombre</label>
                             <div class="col-sm-8">
