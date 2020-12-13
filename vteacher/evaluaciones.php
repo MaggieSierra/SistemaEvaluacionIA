@@ -90,14 +90,16 @@ cerrarConexion($conexion, $query);
     <div class="modal" id="modal_eliminar_evaluacion" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-body">
-                    <h4>¿Desea eliminar la evaluaci&oacuten?</h4>
-                    <input type="hidden" id="id_evaluacion_eliminar" name="id_evaluacion_eliminar" value="">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="eliminar_evaluacion">Eliminar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                </div>
+                <form action="../php/eliminar_evaluacion.php" method="POST">
+                    <div class="modal-body">
+                        <h4>¿Desea eliminar la evaluaci&oacuten?</h4>
+                        <input type="hidden" id="id_evaluacion_eliminar" name="id_evaluacion_eliminar" value="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -110,14 +112,6 @@ cerrarConexion($conexion, $query);
             document.getElementById('id_evaluacion_eliminar').value = id_evaluacion;
             $('#modal_eliminar_evaluacion').modal('show');
         }
-
-        $('#eliminar_evaluacion').on('click', function() {
-            $('#modal_eliminar_evaluacion').modal('hide');
-            $.post('../php/eliminar_evaluacion.php', {id: $('#id_evaluacion_eliminar').val() },
-            function(data) {
-                //$("#div_response").html(data);
-            });
-        });
     </script>
 </body>
 </html>
