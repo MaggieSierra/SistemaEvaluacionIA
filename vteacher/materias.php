@@ -78,12 +78,6 @@ if(isset($_POST['inputNombre'])){
                                 <input type="text" class="form-control" id="inputNombre" name="inputNombre" required />
                             </div>
                         </div>
-                        <div class="form-group" style="display:none">
-                            <label class="col-sm-3 control-label" for="id_usuario">Fraccionamiento</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputUsuario" name="inputUsuario" value=""/>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-default">Guardar</button>
