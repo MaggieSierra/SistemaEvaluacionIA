@@ -96,7 +96,7 @@ cerrarConexion($conexion, $query);
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-default">Guardar</button>
+                        <button type="submit" class="btn btn-success">Guardar</button>
                     </div>
                 </form>
             </div>
