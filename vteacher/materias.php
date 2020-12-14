@@ -117,7 +117,7 @@ foreach ($materias as $row) {
         function editarMateria(valor)
         {
             valor = valor.split("-");
-            var regreso = "<form class='form-horizontal' role='form' method='post' id='materia' action='materias.php'>&nbsp; Nombre: &nbsp; <input type='text' value='"+valor[1]+"' id='nombreMateria' name='nombreMateria' style='width: 300px;'/> &nbsp;&nbsp; <button type='submit' >Guardar</button> <input type='text' value='"+valor[0]+"' id='idMateria' name='idMateria' style='display:none;'/></form>";
+            var regreso = "<form class='form-horizontal' role='form' method='post' id='materia' action='materias.php'>&nbsp; Nombre: &nbsp; <input type='text' value='"+valor[1]+"' id='nombreMateria' name='nombreMateria' style='width: 400px; display:inline-block; margin-bottom:15px;' class='form-control'/> &nbsp;&nbsp; <button type='submit' class='btn btn-success'>Guardar</button> <input type='text' value='"+valor[0]+"' id='idMateria' name='idMateria' style='display:none;'/></form>";
             document.getElementById("formMaterias").innerHTML = regreso;
             document.getElementById("nombreMateria").focus();
         }
