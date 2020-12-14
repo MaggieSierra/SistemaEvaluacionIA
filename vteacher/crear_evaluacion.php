@@ -118,7 +118,8 @@ cerrarConexion($conexion, $query);
                             preguntas: JSON.stringify(preguntas)
                         }, success: function(data){
                             if(data !="" && data > 0){
-                                $('#response').html('<span style="color:red"><strong>Evaluación guardada correctamente</strong></span>');
+                                $('#response').html('<span style="color:green"><strong>Evaluación guardada correctamente</strong></span>');
+                                location.href="../vteacher/evaluaciones.php";
                             }
                         }
                     });

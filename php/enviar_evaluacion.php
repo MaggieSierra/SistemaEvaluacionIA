@@ -55,6 +55,8 @@
     $query->bindParam(2, $id_evaluacion);
     $query->bindParam(3, $total);
     $query->execute();
+    $id_calificacion = $conexion->lastInsertId();
 
     cerrarConexion($conexion, $query_preguntas);
+    header("Location:../vstudent/calificacion.php?id=".$id_calificacion.".php");
 ?>
