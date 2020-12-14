@@ -7,7 +7,7 @@ if($_SESSION['rol'] == 1){
 
 $conexion = obtenerConexion();
 
-$query = $conexion->prepare("SELECT tema FROM Evaluacion WHERE id_evaluacion = ?");
+$query = $conexion->prepare("SELECT * FROM Evaluacion WHERE id_evaluacion = ?");
 $query->bindParam(1, $_GET['id']);
 $query->execute();
 $evaluacion = $query->fetchAll();
@@ -16,27 +16,27 @@ $query = $conexion->prepare("SELECT * FROM Pregunta WHERE id_evaluacion = ?");
 $query->bindParam(1, $_GET['id']);
 $query->execute();
 $preguntas = $query->fetchAll();
-
+$count = 1;
 foreach ($preguntas as $row) { 
     $html_preguntas .= '<div class="card">'
     .'<div class="card-header"></div>'
     .'<div class="card-body">'
     .'<div class="row" style="margin-bottom: 20px;">'
     .' <div class="col-md-3"><strong>Pregunta</strong></div>'
-    .'<div class="col-md-9">'
-    . $row['pregunta']
-    .' </div>'
+    .'<div class="col-md-9">'.$row['pregunta'].' </div>'
     .' </div>'
     .' <div class="row" style="margin-bottom: 20px;">'
     .'    <div class="col-md-3">'
     .'       <strong>Respuesta: </strong>'
     .'  </div>'
-    . '<div class="col-md-9"><input type="text" name="respuesta" id="respuesta" class="form-control" required autocomplete="off"></div>'
+    . '<div class="col-md-9"><input type="text" name="respuesta'.$count.'" id="respuesta'.$count.'" class="form-control" required autocomplete="off"></div>'
     .' </div>'
     .'</div>'
     .'</div>';
+    $count++;
 }
 
+cerrarConexion($conexion, $query);
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,11 +54,11 @@ foreach ($preguntas as $row) {
         <div class="col-12" style="text-align: center;">
 			<h2><?=$evaluacion[0]['tema']?></h2>
         </div><br>
-        <form action="enviar_evaluacion.php" method="POST">
+        <form action="../php/enviar_evaluacion.php" method="POST">
             <div id="preguntas">
                 <?=$html_preguntas?>
             </div>
-            <input type="hidden" id="id_evaluacion" name='id_evaluacion' value='"<?=$evaluacion[0]['id_evaluacion']?>"'>
+            <input type="hidden" id="id_evaluacion" name='id_evaluacion' value="<?=$evaluacion[0]['id_evaluacion']?>">
             <button type="submit" class="btn btn-success">Enviar Evaluación</button>
         </form>
     </div>

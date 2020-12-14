@@ -10,21 +10,33 @@ $conexion = obtenerConexion();
 $query = $conexion->prepare("SELECT Evaluacion.*, nombre_materia FROM Evaluacion INNER JOIN Materia
 ON Materia.id_materia = Evaluacion.id_materia
 INNER JOIN Materia_Alumno on Materia_Alumno.id_materia = Materia.id_materia
-INNER JOIN Usuario ON Usuario.id_usuario = Materia_Alumno.id_usuario 
+INNER JOIN Usuario ON Usuario.id_usuario = Materia_Alumno.id_usuario
 WHERE Usuario.usuario = ? AND Materia_Alumno.id_materia = ? AND Evaluacion.borrado = 0");
 $query->bindParam(1, $_SESSION['usuario']);
 $query->bindParam(2, $_GET['id']);
 $query->execute();
 $evaluaciones = $query->fetchAll();
 
+$query = $conexion->prepare("SELECT * FROM Calificacion WHERE id_usuario = ? AND id_evaluacion = ?");
+
 foreach ($evaluaciones as $row) { 
-    $html .= "<tr><td>".$row['tema']."</td><td><a class='btn btn-primary' href='realizar_evaluacion.php?id=".$row['id_evaluacion']."'>Realizar</a> <a class='btn btn-light' href='calificacion.php'>Calificación</a></td></tr>";
+    $query->bindParam(1, $_SESSION['id_usuario']);
+    $query->bindParam(2, $row['id_evaluacion']);
+    $query->execute();
+    $calificacion = $query->fetchAll();
+    $html .= "<tr><td>".$row['tema']."</td>";
+    if(empty($calificacion)){
+        $html .= "<td><a class='btn btn-primary' href='realizar_evaluacion.php?id=".$row['id_evaluacion']."'>Realizar</a></td></tr>";
+    }else{
+        $html .= "<td><a class='btn btn-light' href='calificacion.php?id=".$calificacion[0]['id_calificacion']."'>Calificación</a></td></tr>";
+    }
 }
 
 if(empty($html)){
     $html .= "<tr><td colspan='3'>No se encontraron evaluaciones</td></tr>";
 }
 
+cerrarConexion($conexion, $query);
 ?>
 <!DOCTYPE html>
 <html>

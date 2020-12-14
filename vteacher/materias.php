@@ -42,6 +42,7 @@ foreach ($materias as $row) {
     $html .= "<tr><td>$row[clave_materia]</td><td>$row[nombre_materia]</td><td><a type='button' class='btn btn-warning' onclick='editarMateria(\"$row[id_materia]-$row[nombre_materia]\");'/><i class='fas fa-edit'></i</a></td></tr>";
 }
 
+cerrarConexion($conexion, $query);
 
 ?>
 <!DOCTYPE html>
