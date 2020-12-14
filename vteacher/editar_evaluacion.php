@@ -21,7 +21,7 @@ $query->execute();
 $materias = $query->fetchAll();
 
 foreach ($materias as $row) { 
-    if($row['id_materia'] == $evaluacion['id_materia']){
+    if($row['id_materia'] == $evaluacion[0]['id_materia']){
         $list_materias .= "<option value='".$row['id_materia']."' selected>".$row['nombre_materia']."</option>";
     }else{
         $list_materias .= "<option value='".$row['id_materia']."'>".$row['nombre_materia']."</option>";
