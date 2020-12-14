@@ -24,6 +24,7 @@
         $query->bindParam(3, $id_usuario);
         $query->bindParam(4, $respuesta);
         $query->execute();
+        $count ++;
 
         //revisar si tiene las palabras clave
         $palabras_clave = explode(",", $row['palabras_clave']); 
@@ -31,7 +32,7 @@
         $palabras_encontradas = 0;
 
         foreach($palabras_clave as $clave){
-            $pos = strpos($respuesta, $clave);
+            $pos = strpos(quitar_acentos(strtolower($respuesta)), quitar_acentos(strtolower($clave)));
             if($pos === false){
                 echo $clave . ": - <br>";
             } else{
@@ -58,5 +59,14 @@
     $id_calificacion = $conexion->lastInsertId();
 
     cerrarConexion($conexion, $query_preguntas);
+
+    function quitar_acentos ($cadena){
+        $originales = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
+        $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+        $cadena = utf8_decode($cadena);
+        $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+        $cadena = strtolower($cadena);
+        return utf8_encode($cadena);
+    }
     header("Location:../vstudent/calificacion.php?id=".$id_calificacion.".php");
 ?>

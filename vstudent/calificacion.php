@@ -41,14 +41,11 @@ foreach ($calificacion as $row) {
 
 $query = $conexion->prepare("SELECT Respuesta.*, pregunta, palabras_clave FROM Respuesta 
 INNER JOIN Pregunta ON Pregunta.id_pregunta = Respuesta.id_pregunta
-INNER JOIN Usuario ON Usuario.id_usuario = Respuesta.id_usuario
-INNER JOIN Calificacion ON Calificacion.id_usuario = Respuesta.id_usuario
-INNER JOIN Evaluacion ON Evaluacion.id_evaluacion = Calificacion.id_evaluacion
-WHERE id_calificacion = ?");
+INNER JOIN Calificacion ON Calificacion.id_evaluacion = Respuesta.id_evaluacion WHERE id_calificacion = ?");
 $query->bindParam(1, $_GET['id']);
 $query->execute();
 $preguntas_respuestas = $query->fetchAll();
-$html_resp .= '<div class="card">'
+$html_resp = '<div class="card">'
     .'<div class="card-header"></div>'
     .'<div class="card-body">';
 foreach ($preguntas_respuestas as $row) { 
@@ -92,6 +89,7 @@ cerrarConexion($conexion, $query);
         <div class="respuestas">
         <?=$html_resp?>
         </div>
+        <br>
     </div>
 
     <script src="../assets/js/jquery.min.js"></script>
