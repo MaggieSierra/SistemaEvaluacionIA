@@ -41,7 +41,7 @@
             }
         }
 
-        $porcentaje = ($palabras_encontradas*60)/$count_palabras;
+        $porcentaje = ($palabras_encontradas*100)/$count_palabras;
 
         $porcentaje_total += $porcentaje;
         echo $porcentaje . "%<br><br>"; 
