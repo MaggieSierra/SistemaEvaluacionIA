@@ -28,7 +28,7 @@ if(isset($_POST["id_materia"])){
 }
 
 foreach ($evaluaciones as $row) { 
-    $html .= "<tr><td>".$row['nombre_materia']."</td><td>".$row['tema']."</td><td>".$row['nombre_alumno']."</td><td>".$row['calificacion']."/60</td>
+    $html .= "<tr><td>".$row['nombre_materia']."</td><td>".$row['tema']."</td><td>".$row['nombre_alumno']."</td><td>".$row['calificacion']."</td>
     </tr>";
 }
 
