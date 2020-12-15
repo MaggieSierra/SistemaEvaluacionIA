@@ -33,7 +33,7 @@ foreach ($calificacion as $row) {
     .' </div>'
     .'<div class="row" style="margin-bottom: 10px;">'
     .' <div class="col-md-3"><strong>Calificación:</strong></div>'
-    .' <div class="col-md-9">'.$row['calificacion'].'/60</div>'
+    .' <div class="col-md-9">'.$row['calificacion'].'</div>'
     .' </div>'
     .' </div>'
     .'</div>';
